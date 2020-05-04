@@ -61,10 +61,14 @@ def findComplement_v2(num: int) -> int:
     return ~num & sum([2 ** b for b in reversed(range((num).bit_length()))])
 
 
+def findComplement_v3(num: int) -> int:
+    return ~num & (2 ** (num).bit_length() - 1)
+
+
 if __name__ == '__main__':
-    print(findComplement_v2(5), 2)
-    print(findComplement_v2(1), 0)
-    print(findComplement_v2(7), 0)
-    print(findComplement_v2(10), 5)
+    print(findComplement_v3(5), 2)
+    print(findComplement_v3(1), 0)
+    print(findComplement_v3(7), 0)
+    print(findComplement_v3(10), 5)
 
 # last line of code
