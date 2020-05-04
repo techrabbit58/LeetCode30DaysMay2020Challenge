@@ -68,6 +68,7 @@ def findComplement_v3(num: int) -> int:
 
 
 def findComplement_v4(num: int) -> int:
+    """The lLeetCode solutions runner judges this to be the fastest of all four."""
     return num ^ max(1, 2 ** (num).bit_length() - 1)
 
 
