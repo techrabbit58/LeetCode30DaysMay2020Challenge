@@ -58,17 +58,27 @@ def findComplement(num: int) -> int:
 
 
 def findComplement_v2(num: int) -> int:
+    if not num:
+        return 1
     return ~num & sum([2 ** b for b in reversed(range((num).bit_length()))])
 
 
 def findComplement_v3(num: int) -> int:
-    return ~num & (2 ** (num).bit_length() - 1)
+    return ~num & max(1, 2 ** (num).bit_length() - 1)
+
+
+def findComplement_v4(num: int) -> int:
+    return num ^ max(1, 2 ** (num).bit_length() - 1)
 
 
 if __name__ == '__main__':
-    print(findComplement_v3(5), 2)
-    print(findComplement_v3(1), 0)
-    print(findComplement_v3(7), 0)
-    print(findComplement_v3(10), 5)
+    print(findComplement_v4(5), 2)
+    print(findComplement_v4(1), 0)
+    print(findComplement_v4(7), 0)
+    print(findComplement_v4(10), 5)
+    print(findComplement_v4(0), 1)
+    print(findComplement_v3(0), 1)
+    print(findComplement_v2(0), 1)
+    print(findComplement(0), 1)
 
 # last line of code
