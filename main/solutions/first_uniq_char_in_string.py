@@ -1,11 +1,7 @@
 """
-Week 1, Day 5
-First Unique Character in a String
+Week 1, Day 5: First Unique Character in a String
 
-Given a string, find the first non-repeating 
-character in it and return it's index. 
-
-If it doesn't exist, return -1.
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
 
 Examples:
 
@@ -17,8 +13,8 @@ Examples:
 
 N o t e
 
-    You may assume the string contain only
-    lowercase letters.
+    You may assume the string contain only lowercase letters.
+
 """
 from collections import Counter
 
@@ -35,5 +31,6 @@ if __name__ == '__main__':
     print(firstUniqChar('leetcode'), 0)
     print(firstUniqChar('loveleetcode'), 2)
     print(firstUniqChar('abacabac'), -1)
+    print(firstUniqChar('the quick brown fox jumps over the lazy dog'), 4)
 
 # last line of code
