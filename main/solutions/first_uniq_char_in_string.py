@@ -48,6 +48,12 @@ def firstUniqChar_v3(s: str) -> int:
     return -1
 
 
+def firstUniqChar_v4(s: str) -> int:
+    """Worst case complexity O(n^2), but good for some corner cases."""
+    index = [s.index(c) for c in set(s) if s.count(c) == 1]
+    return min(index) if index else -1
+
+
 if __name__ == '__main__':
 
     print(firstUniqChar('leetcode'), 0)
@@ -58,18 +64,28 @@ if __name__ == '__main__':
     print(firstUniqChar('the quick brown fox jumps over the lazy dog'), 4)
     print(firstUniqChar('bcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba'), 50)
     print(firstUniqChar('bcdefghijklmnopqrstuvwxyzbcdefghijklmnopqrstuvwxyza'), 50)
+    print(firstUniqChar('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxbbbbb'), 45)
     print('v1', time.perf_counter_ns() - start)
 
     start = time.perf_counter_ns()
     print(firstUniqChar_v2('the quick brown fox jumps over the lazy dog'), 4)
     print(firstUniqChar_v2('bcdefghijklmnopqrstuvwxyzbcdefghijklmnopqrstuvwxyza'), 50)
     print(firstUniqChar_v2('bcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba'), 50)
+    print(firstUniqChar_v2('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxbbbbb'), 45)
     print('v2', time.perf_counter_ns() - start)
 
     start = time.perf_counter_ns()
     print(firstUniqChar_v3('the quick brown fox jumps over the lazy dog'), 4)
     print(firstUniqChar_v3('bcdefghijklmnopqrstuvwxyzbcdefghijklmnopqrstuvwxyza'), 50)
     print(firstUniqChar_v3('bcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba'), 50)
+    print(firstUniqChar_v3('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxbbbbb'), 45)
     print('v3', time.perf_counter_ns() - start)
+
+    start = time.perf_counter_ns()
+    print(firstUniqChar_v4('the quick brown fox jumps over the lazy dog'), 4)
+    print(firstUniqChar_v4('bcdefghijklmnopqrstuvwxyzbcdefghijklmnopqrstuvwxyza'), 50)
+    print(firstUniqChar_v4('bcdefghijklmnopqrstuvwxyzzyxwvutsrqponmlkjihgfedcba'), 50)
+    print(firstUniqChar_v4('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxbbbbb'), 45)
+    print('v4', time.perf_counter_ns() - start)
 
 # last line of code
