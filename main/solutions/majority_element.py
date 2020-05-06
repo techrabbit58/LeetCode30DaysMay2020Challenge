@@ -56,8 +56,22 @@ def majorityElement_v4(nums: List[int]) -> int:
     return Counter(nums).most_common()[0][0]
 
 
+def majorityElement2(nums: List[int]) -> List[int]:
+    """
+    This solves a similar problem. It is LeetCode problem #229, Majority Element II:
+    Find all elements in an array that appear more than ⌊ n/3 ⌋ times.
+    """
+    threshold = int(len(nums) / 3)
+    counts = Counter(nums)
+    return [k for k, v in counts.items() if v > threshold]
+
+
 if __name__ == '__main__':
-    print(majorityElement_v4([3, 2, 3]), 3)
-    print(majorityElement_v4([2, 2, 1, 1, 1, 2, 2]), 2)
+
+    print(majorityElement_v3([3, 2, 3]), 3)
+    print(majorityElement_v3([2, 2, 1, 1, 1, 2, 2]), 2)
+
+    print(majorityElement2([3, 2, 3]), [3])
+    print(majorityElement2([1, 1, 1, 3, 3, 2, 2, 2]), [1, 2])
 
 # last line of code
