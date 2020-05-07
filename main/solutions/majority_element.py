@@ -48,12 +48,26 @@ def majorityElement_v3(nums: List[int]) -> int:
 
 def majorityElement_v4(nums: List[int]) -> int:
     """
-    This solution relies on python magic, together with the idea that, if there is only one
-    majority element, and there is always one, in any case, it must be the most common
-    element in the given list. So we can let do Counter object the whole work.
-    According to a post at LeetCode: https://leetcode.com/sapo96/
+    This solution relies on python magic, together with the idea that, because there can only be one
+    majority element, and, by definition of problem, there is always one, in any case, it must be 
+    the most common element in the given list. So we can let Counter object do the whole at once.
+    Has been contributed by: https://leetcode.com/sapo96/
     """
     return Counter(nums).most_common()[0][0]
+
+
+def majorityElement_v5(nums: List[int]) -> int:
+    """Another approach: Boyer/Moore Voting algorithm."""
+    majority_element = None
+    count = 0
+    for element in nums:
+        if count == 0:
+            count, majority_element = 1, element
+        elif majority_element == element:
+            count += 1
+        else:
+            count -= 1
+    return majority_element
 
 
 def majorityElement2(nums: List[int]) -> List[int]:
@@ -68,8 +82,8 @@ def majorityElement2(nums: List[int]) -> List[int]:
 
 if __name__ == '__main__':
 
-    print(majorityElement_v3([3, 2, 3]), 3)
-    print(majorityElement_v3([2, 2, 1, 1, 1, 2, 2]), 2)
+    print(majorityElement_v5([3, 2, 3]), 3)
+    print(majorityElement_v5([2, 2, 1, 1, 1, 2, 2]), 2)
 
     print(majorityElement2([3, 2, 3]), [3])
     print(majorityElement2([1, 1, 1, 3, 3, 2, 2, 2]), [1, 2])
