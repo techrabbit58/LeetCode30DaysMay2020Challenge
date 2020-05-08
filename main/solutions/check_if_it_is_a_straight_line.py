@@ -32,8 +32,7 @@ def checkStraightLine(coordinates: List[List[int]]) -> bool:
     (x0, y0), (x1, y1) = coordinates[:2]
     dx, dy = x0 - x1, y0 - y1
     for pn in islice(coordinates, 2, None):
-        xn, yn = pn
-        if (dy * (x0 - xn) - dx * (y0 - yn)):
+        if (dy * (x0 - pn[0]) - dx * (y0 - pn[1])):
             return False
     return True
 
