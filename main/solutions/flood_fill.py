@@ -69,15 +69,45 @@ class Solution:
         self.image[sr][sc] = newColor 
 
 
+class SolutionV2:
+    """
+    This solution is the proposed one, from LeetCode.
+    It looks much nicer and less convoluteed, compared to my own,
+    but is not necessarily faster. It has same complexity:
+    Time: O(n) - Space: O(n)
+    """
+
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        R, C = len(image), len(image[0])
+        color = image[sr][sc]
+        if color == newColor:
+            return image
+
+        def dfs(r: int, c: int) -> None:
+            if image[r][c] == color:
+                image[r][c] = newColor
+                if r >= 1:
+                    dfs(r - 1, c)
+                if r+1 < R:
+                    dfs(r + 1, c)
+                if c >= 1:
+                    dfs(r, c - 1)
+                if c+1 < C:
+                    dfs(r, c + 1)
+
+        dfs(sr, sc)
+        return image
+
+
 if __name__ == '__main__':
     print(
-        Solution().floodFill([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2),
+        SolutionV2().floodFill([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2),
         [[2, 2, 2], [2, 2, 0], [2, 0, 1]],
         sep='\n'
     )
     print('---')
     print(
-        Solution().floodFill([[0, 0, 0], [0, 1, 1]], 1, 1, 1),
+        SolutionV2().floodFill([[0, 0, 0], [0, 1, 1]], 1, 1, 1),
         [[0, 0, 0], [0, 1, 1]],
         sep='\n'
     )
