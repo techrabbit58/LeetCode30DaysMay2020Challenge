@@ -41,18 +41,19 @@ class Solution:
 class SolutionV2:
     """
     Solution complexities: time is O(log n), space is O(1).
+    This implementation follows a solution from the LeetCode discussion page:
+    https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3327/discuss/628036/Python-Binary-Search-O(logn)-explained
     """
 
     def singleNonDuplicate(self, nums: List[int]) -> int:
-        j = 0
-        k = len(nums) // 2
-        while (k - j) > 1:
-            if nums[k] == nums[k - 1]:
-                j = k + 1
-                k += (len(nums) - j) // 2
+        lo, hi = 0, len(nums) - 1
+        while lo < hi:
+            mid = ((hi + lo) >> 2) << 1
+            if nums[mid] == nums[mid + 1]:
+                lo = mid + 2
             else:
-                k = (k - 1) // 2
-        return nums[k]
+                hi = mid
+        return nums[hi]
 
 
 if __name__ == '__main__':
@@ -60,5 +61,15 @@ if __name__ == '__main__':
     print(SolutionV2().singleNonDuplicate([3, 3, 7, 7, 10, 11, 11]) == 10)
     print(SolutionV2().singleNonDuplicate([1]) == 1)
     print(SolutionV2().singleNonDuplicate([1, 1, 2]) == 2)
+    print(SolutionV2().singleNonDuplicate([1, 2, 2]) == 1)
+    print(SolutionV2().singleNonDuplicate([1, 2, 2, 3, 3]) == 1)
+    print(SolutionV2().singleNonDuplicate([1, 1, 2, 3, 3]) == 2)
+    print(SolutionV2().singleNonDuplicate([1, 1, 2, 2, 3]) == 3)
+    print(SolutionV2().singleNonDuplicate([1, 2, 2, 3, 3, 4, 4]) == 1)
+    print(SolutionV2().singleNonDuplicate([1, 1, 2, 2, 3, 3, 4]) == 4)
+
+    print(SolutionV2().singleNonDuplicate([1, 1, 2, 3, 3, 4, 4]) == 2)
+    print(SolutionV2().singleNonDuplicate([1, 1, 2, 2, 3, 4, 4]) == 3)
+    print(SolutionV2().singleNonDuplicate([3, 3, 7, 7, 10, 11, 11]) == 10)
 
 # last line of code
