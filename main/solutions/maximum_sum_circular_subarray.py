@@ -57,7 +57,7 @@ class Solution:
     def maxSubarraySumCircular(self, A: List[int]) -> int:
         def max_subarray_sum(arr: List[int]) -> int:
             current_sum = max_sum = arr[0]
-            for n in islice(arr, 1, None):
+            for n in arr[1:]:
                 current_sum = n + max(0, current_sum)
                 max_sum = max(current_sum, max_sum)
             return max_sum
@@ -87,7 +87,7 @@ class SolutionV2:
 
 if __name__ == '__main__':
 
-    obj = SolutionV2()
+    obj = Solution()
 
     print(obj.maxSubarraySumCircular([1, -2, 3, -2]) == 3)
     print(obj.maxSubarraySumCircular([5, -3, 5]) == 10)
