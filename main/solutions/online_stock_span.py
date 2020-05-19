@@ -51,21 +51,51 @@ E x a m p l e
 
 
 class StockSpanner:
+    """
+    This solution was inspired by a discussion of a very similar problem on GeeksForGeeks.org
+    The solution is relatively slow and consumes a lot of memory.
+    """
 
     def __init__(self) -> None:
-        self.history = {}
-        self.span = 0
+        self.levels = []
         self.day = 0
 
     def next(self, price: int) -> int:
-        self.history[price] = self.day
-        print([d for p, d in self.history.items() if p <= price])
         self.day += 1
-        return self.span
+        while len(self.levels) and price >= self.levels[-1][0]:
+            self.levels.pop()
+        span = self.day if not len(self.levels) else self.day - self.levels[-1][1]
+        self.levels.append((price, self.day))
+        return span
+
+
+class StockSpannerV2:
+    """
+    This is the LeetCode published solution. It is very similar to the first approach, but much more elegant and with
+    less calculations in the loop.
+
+    A l g o r i t h m
+
+    Let's maintain a weighted stack of decreasing elements. The size of the weight will be the total number of
+    elements skipped. For example, 11, 3, 9, 5, 6, 4, 7 will be (11, weight=1), (9, weight=2), (7, weight=4).
+
+    When we get a new element like 10, this helps us count the previous values faster by popping weighted elements
+    off the stack. The new stack at the end will look like (11, weight=1), (10, weight=7).
+    """
+
+    def __init__(self) -> None:
+        self.monotone_stack = []
+
+    def next(self, price: int) -> int:
+        weight = 1
+        while self.monotone_stack and self.monotone_stack[-1][0] <= price:
+            weight += self.monotone_stack.pop()[1]
+        self.monotone_stack.append((price, weight))
+        return weight
 
 
 if __name__ == '__main__':
-    obj = StockSpanner()
+    obj = StockSpannerV2()
     print(obj.next(100) == 1)
     print(obj.next(80) == 1)
     print(obj.next(60) == 1)
@@ -73,9 +103,9 @@ if __name__ == '__main__':
     print(obj.next(60) == 1)
     print(obj.next(75) == 4)
     print(obj.next(85) == 6)
-    print('-' * 18)
+    print('-' * 15)
 
-    obj = StockSpanner()
+    obj = StockSpannerV2()
     print(obj.next(73) == 1)
     print(obj.next(99) == 2)
     print(obj.next(41) == 1)
@@ -86,9 +116,9 @@ if __name__ == '__main__':
     print(obj.next(1) == 1)
     print(obj.next(83) == 7)
     print(obj.next(53) == 1)
-    print('-' * 18)
+    print('-' * 15)
 
-    obj = StockSpanner()
+    obj = StockSpannerV2()
     print(obj.next(9) == 1)
     print(obj.next(10) == 2)
     print(obj.next(11) == 3)
@@ -99,6 +129,19 @@ if __name__ == '__main__':
     print(obj.next(86) == 8)
     print(obj.next(88) == 9)
     print(obj.next(98) == 10)
-    print('-' * 18)
+    print('-' * 15)
+
+    obj = StockSpannerV2()
+    print(obj.next(28) == 1)
+    print(obj.next(14) == 1)
+    print(obj.next(28) == 3)
+    print(obj.next(35) == 4)
+    print(obj.next(46) == 5)
+    print(obj.next(53) == 6)
+    print(obj.next(66) == 7)
+    print(obj.next(80) == 8)
+    print(obj.next(87) == 9)
+    print(obj.next(88) == 10)
+    print('-' * 15)
 
 # last line of code
