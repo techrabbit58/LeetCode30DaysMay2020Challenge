@@ -43,7 +43,7 @@ Examples:
         Total number of squares = 6 + 1 = 7.
 
 """
-from collections import defaultdict, Counter
+from collections import defaultdict
 from typing import List
 
 
