@@ -43,7 +43,7 @@ Examples:
         Total number of squares = 6 + 1 = 7.
 
 """
-from collections import defaultdict
+from collections import defaultdict, Counter
 from typing import List
 
 
@@ -83,23 +83,24 @@ class SolutionV2:
 
     def countSquares(self, matrix: List[List[int]]) -> int:
         height, width = len(matrix), len(matrix[0])
-        squares_index = {}
+        ones_in_a_row = {}
+        answer = 0
         for row in range(height):
-            squares_index[row] = defaultdict(list)
+            ones_in_a_row[row] = defaultdict(list)
             ones = 0
             for col, element in enumerate(matrix[row]):
                 if element:
                     ones += 1
+                    answer += 1
                     for n in range(1, ones + 1):
-                        squares_index[row][n] += list(range(col, col - n, -n))
+                        ones_in_a_row[row][n] += list(range(col, col - n, -n))
                 else:
                     ones = 0
-        answer = 0
-        for size in range(1, min(height, width) + 1):
+        for size in range(2, min(height, width) + 1):
             for row in range(height - size + 1):
-                for index in squares_index[row][size]:
+                for index in ones_in_a_row[row][size]:
                     for offset in range(row + 1, row + size):
-                        if index not in squares_index[offset][size]:
+                        if index not in ones_in_a_row[offset][size]:
                             break
                     else:
                         answer += 1
