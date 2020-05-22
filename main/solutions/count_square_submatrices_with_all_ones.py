@@ -43,6 +43,7 @@ Examples:
         Total number of squares = 6 + 1 = 7.
 
 """
+import sys
 from collections import defaultdict
 from typing import List
 
@@ -79,7 +80,10 @@ class Solution:
 
 
 class SolutionV2:
-    """This has acceptable run time (small 1000 ms range)."""
+    """
+    This has almost acceptable run time, and does fit into the LeetCode time limit.
+    But there are said to be much better approaches.
+    """
 
     def countSquares(self, matrix: List[List[int]]) -> int:
         height, width = len(matrix), len(matrix[0])
@@ -193,7 +197,7 @@ if __name__ == '__main__':
     expected = 7
     print(o.countSquares(matrix) == expected)
 
-    # sys.exit(0)
+    sys.exit(0)
 
     matrix = [
         [0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0,
