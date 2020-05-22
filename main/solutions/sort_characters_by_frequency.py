@@ -8,8 +8,7 @@ from collections import Counter
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        frequencies = Counter(s)
-        return ''.join([c[0] * c[1] for c in frequencies.most_common()])
+        return ''.join(c * f for c, f in Counter(s).most_common())
 
 
 if __name__ == '__main__':
