@@ -43,9 +43,10 @@ Examples:
         Total number of squares = 6 + 1 = 7.
 
 """
-import sys
 from collections import defaultdict
 from typing import List
+
+import sys
 
 
 class Solution:
@@ -111,8 +112,29 @@ class SolutionV2:
         return answer
 
 
+class SolutionV3:
+    """
+    Time complexity is O(m*n).
+    Space complexity is O(1).
+
+    Look here, for an explanation:
+    https://leetcode.com/problems/count-square-submatrices-with-all-ones/discuss/643429/Python-DP-Solution-%2B-Thinking-Process-Diagrams-(O(mn)-runtime-O(1)-space)
+    """
+
+    def countSquares(self, matrix: List[List[int]]) -> int:
+        width, height = len(matrix[0]), len(matrix)
+        answer = sum(matrix[0])
+        for y in range(1, height):
+            for x in range(1, width):
+                if matrix[y][x]:
+                    y1, x1 = y - 1, x - 1
+                    matrix[y][x] = min(matrix[y][x1], matrix[y1][x1], matrix[y1][x]) + 1
+            answer += sum(matrix[y])
+        return answer
+
+
 if __name__ == '__main__':
-    o = SolutionV2()
+    o = SolutionV3()
 
     matrix = [[0]]
     expected = 0
@@ -197,7 +219,7 @@ if __name__ == '__main__':
     expected = 7
     print(o.countSquares(matrix) == expected)
 
-    sys.exit(0)
+    # sys.exit(0)
 
     matrix = [
         [0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0,
