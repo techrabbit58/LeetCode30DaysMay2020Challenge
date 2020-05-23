@@ -122,10 +122,9 @@ class SolutionV3:
     """
 
     def countSquares(self, matrix: List[List[int]]) -> int:
-        width, height = len(matrix[0]), len(matrix)
         answer = sum(matrix[0])
-        for y in range(1, height):
-            for x in range(1, width):
+        for y in range(1, len(matrix)):
+            for x in range(1, len(matrix[0])):
                 if matrix[y][x]:
                     y1, x1 = y - 1, x - 1
                     matrix[y][x] = min(matrix[y][x1], matrix[y1][x1], matrix[y1][x]) + 1
