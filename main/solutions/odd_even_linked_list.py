@@ -22,21 +22,7 @@ Note:
     (2) The first node is considered odd, the second node even and so on ...
 
 """
-
-
-class ListNode:
-    def __init__(self, val=0, next_=None):
-        self.val = val
-        self.next = next_
-
-    def __str__(self):
-        s = [f'{self.val} -> ']
-        walker = self.next
-        while walker is not None:
-            s.append(f'{walker.val} -> ')
-            walker = walker.next
-        s.append('None')
-        return ''.join(s)
+from solutions.list_node import ListNode
 
 
 class Solution:

@@ -33,12 +33,7 @@ Notes:
 """
 from collections import deque
 
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+from solutions.tree_node import TreeNode
 
 
 def isCousins(root: TreeNode, x: int, y: int) -> bool:

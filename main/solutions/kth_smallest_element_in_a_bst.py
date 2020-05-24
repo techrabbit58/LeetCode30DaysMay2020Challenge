@@ -33,13 +33,7 @@ E x a m p l e s
     Output: 3
     ---------------
 """
-
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+from solutions.tree_node import TreeNode
 
 
 class Solution:
