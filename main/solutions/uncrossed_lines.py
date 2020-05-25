@@ -46,6 +46,9 @@ Remark:
     The given solution comes from
     https://massivealgorithms.blogspot.com/2019/06/leetcode-1035-uncrossed-lines.html
 
+    The approach is, to find the longest sequence of numbers that is common to both integer lists,
+    by applying a two dimensional memoization (the DP matrix.)
+
 """
 from typing import List
 
