@@ -55,6 +55,10 @@ class Solution:
 
         Please see Wikipedia for reference:
         https://en.wikipedia.org/wiki/Bipartite_graph
+
+        Another solution with time complexity O(n) and aux. space complexity O(n) is given here:
+        https://www.geeksforgeeks.org/check-if-a-given-graph-is-bipartite-using-dfs/?ref=rp
+        I guess it will be executed significantly faster. But have not tried yet.
         """
         ALT_COLOR = [1, 0]
         UNDYED = -1
