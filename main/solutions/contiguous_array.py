@@ -17,7 +17,6 @@ Example 2:
 
 Note: The length of the given binary array will not exceed 50,000.
 """
-from collections import defaultdict
 from typing import List
 
 
