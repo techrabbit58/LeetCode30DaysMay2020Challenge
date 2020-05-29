@@ -1,5 +1,5 @@
 """
-iWeek 5, Day 1: Course Schedule
+Week 5, Day 1: Course Schedule
 
 There are a total of numCourses courses you have to take, labeled from 0 to numCourses-1.
 
@@ -39,21 +39,44 @@ Hints:
     If a cycle exists, no topological ordering exists and therefore it will be
     impossible to take all courses.
 
-    Knowledge about topological sort via DFS is helpful to understand and accomplish
-    the task.
-
-    Knowledge and application of BFS could also be helpful, and can show a way to
-    the solution.
 """
+from collections import defaultdict
 from typing import List
 
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        pass
+        follower_of = defaultdict(list)
+        for a, b in prerequisites:
+            follower_of[a].append(b)
+
+        def is_cyclic(course: int, visited: List[bool], stack: List[bool]) -> bool:
+            visited[course] = True
+            stack[course] = True
+            for neighbour in follower_of[course]:
+                if not visited[neighbour]:
+                    if is_cyclic(neighbour, visited, stack):
+                        return True
+                elif stack[neighbour]:
+                    return True
+            stack[course] = False
+            return False
+
+        visited = [False] * numCourses
+        stack = [False] * numCourses
+        for course in range(numCourses):
+            if not visited[course]:
+                if is_cyclic(course, visited, stack):
+                    return False
+        return True
 
 
 if __name__ == '__main__':
-    pass
+    o = Solution()
+
+    print(o.canFinish(2, [[1, 0]]), True)
+    print(o.canFinish(2, [[1, 0], [0, 1]]), False)
+    print(o.canFinish(4, [[0, 1], [1, 2], [2, 3], [0, 2], [2, 0], [3, 3]]), False)
+    print(o.canFinish(4, [[0, 1], [1, 2], [2, 3], [0, 2]]), True)
 
 # last line of code
