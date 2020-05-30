@@ -50,16 +50,16 @@ class Solution:
         for a, b in prerequisites:
             follower_of[a].append(b)
 
-        def is_cyclic(course: int, visited: List[bool], stack: List[bool]) -> bool:
+        def is_cyclic(course: int, visited: List[bool], memo: List[bool]) -> bool:
             visited[course] = True
-            stack[course] = True
+            memo[course] = True
             for neighbour in follower_of[course]:
                 if not visited[neighbour]:
-                    if is_cyclic(neighbour, visited, stack):
+                    if is_cyclic(neighbour, visited, memo):
                         return True
-                elif stack[neighbour]:
+                elif memo[neighbour]:
                     return True
-            stack[course] = False
+            memo[course] = False
             return False
 
         visited = [False] * numCourses
